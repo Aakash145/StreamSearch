@@ -65,11 +65,18 @@
     .display-2{
         font-size: 3.5rem;
         padding: auto;
+        overflow: hidden;
     }
 
     .display-4{
         font-size: 3rem;
         float: left;
+        overflow: hidden;
+    }
+
+    .searchBar{
+        margin-bottom: 300px;
+
     }
 
   }
