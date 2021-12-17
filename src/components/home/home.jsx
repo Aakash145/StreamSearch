@@ -93,7 +93,7 @@ function Home(){
                         autocomplete="off"
                         list="suggestions"
                         onInput={displayMovie}
-                        onKeyPress={(event) => {
+                        onKeyUp={(event) => {
                                  return searchMovie(event)
                         }}
                              />
