@@ -57,8 +57,6 @@
     }
 
     .homeHeading{
-        margin: auto;
-        padding: auto;
         overflow: initial;
     }
 
@@ -71,12 +69,9 @@
     .display-4{
         font-size: 3rem;
         float: left;
+        padding-left: 1rem;
+        padding-right: 1rem;
         overflow: hidden;
-    }
-
-    .searchBar{
-        margin-bottom: 300px;
-
     }
 
   }
