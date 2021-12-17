@@ -54,6 +54,7 @@
     .searchfield{
         width: 200px !important;
         margin: auto;
+        padding: auto;
     }
 
     .homeHeading{
