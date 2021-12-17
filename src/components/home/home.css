@@ -54,12 +54,12 @@
     .searchfield{
         width: 200px !important;
         margin: auto;
-        padding: auto;
     }
 
     .homeHeading{
         margin: auto;
         padding: auto;
+        overflow: initial;
     }
 
     .display-2{
@@ -70,7 +70,6 @@
     .display-4{
         font-size: 3rem;
         float: left;
-        overflow: hidden;
     }
 
   }
