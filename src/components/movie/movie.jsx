@@ -7,13 +7,12 @@ function Movie(props){
 
     const [isLoading, setLoading] = useState(true);
     const [movieData, setMovieData] = useState();
+    const [streamServices, setStreamServices] = useState();
 
     const movieId = props.id
-    //console.log(movieId)
+    const countryCode = props.code
 
     useEffect(() => {
-        console.log(movieId)
-
         axios.get("https://api.themoviedb.org/3/movie/"+movieId,{
             params: {
               api_key: "496dd84fc27f6d28eafe675507234d8e",
@@ -24,6 +23,25 @@ function Movie(props){
             setLoading(false);
         })
 
+        axios.get("https://api.themoviedb.org/3/movie/"+movieId+"/watch/providers",{
+          params: {
+            api_key: "496dd84fc27f6d28eafe675507234d8e",
+          }
+        })
+      .then((res) => {
+          if(typeof(res.data.results) != "undefined"){
+            //console.log(res.data.results[countryCode])
+            const services = res.data.results[countryCode].flatrate;
+            let stringServices = "";
+            for(var i=0; i< services.length; i++){
+              stringServices += services[i].provider_name + ", ";
+            }
+            setStreamServices(stringServices)
+          }
+          else{
+            setStreamServices("Not Available!")
+          }
+      })
     })
 
     if (isLoading) {
@@ -42,6 +60,7 @@ function Movie(props){
     <li className="list-group-item">{movieData.overview}</li>
     <li className="list-group-item">Runtime: {movieData.runtime} minutes</li>
     <li className="list-group-item">IMDB Rating: {movieData.vote_average}</li>
+    <li className="list-group-item">Available On: {streamServices} </li>
   </ul>
 </div>
     )

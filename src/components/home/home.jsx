@@ -9,15 +9,26 @@ function Home(){
     const [search, setSearch] = useState(false);
     const [results, setResults] = useState([]);
     const [movieId, setMovieId] = useState();
+    const [countryCode, setCountryCode] = useState();
     var options = '';
 
     useEffect(() => {
+
+      axios.get("https://api.ipregistry.co/",{
+        params: {
+          key: "y8ncvw0bpov57zmr",
+        }
+      })
+    .then((res) => {
+        setCountryCode(res.data.location.country.code)
+        //console.log(res.data.location.country.code)
+    })
+
         filterData(results)
     })
 
     function searchMovie(e){
         const searchedItem = e.target.value;
-        //Call Movie API
         if(e.key === " "){
             axios.get("https://api.themoviedb.org/3/search/movie",{
                 params: {
@@ -26,11 +37,7 @@ function Home(){
                 }
               })
             .then((res) => {
-                //console.log(res.data.results)
                 setResults(res.data.results)
-                // setSearch(true);
-                // setMovieId(res.data.results[0].id)
-                //filterData(res.data.results)
             })
         }else if(e.key === "Enter"){
             axios.get("https://api.themoviedb.org/3/search/movie",{
@@ -40,11 +47,8 @@ function Home(){
                 }
               })
             .then((res) => {
-                //console.log(res.data.results)
-                //setResults(res.data.results)
                 setMovieId(res.data.results[0].id)
                 setSearch(true);
-                //filterData(res.data.results)
             })
         }
     }
@@ -103,7 +107,7 @@ function Home(){
                 </div>
                 </div>
                 <div className="row movieCard">
-                {search && <Movie id={movieId}/> }
+                {search && <Movie id={movieId} code={countryCode}/> }
                 </div>
         </div>
     )
